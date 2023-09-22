@@ -17,7 +17,7 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
 nltk.download('all')
 nltk.download('stopwords')
 # Replace 'YOUR_DRIVE_LINK_HERE' with the actual link to your .pkl file
-drive_link = 'https://drive.google.com/drive/u/0/folders/1A3g5O4gDbYiwCbdxcQebqh0pT6ORo2KC'
+drive_link = 'https://drive.google.com/file/d/153DIFyVs6Zc8PakmrwnZRMuG-wekYT7M/view?usp=drive_link'
 
 # Define a function to download the .pkl file and load it as a model
 def load_model_from_drive(drive_link):
