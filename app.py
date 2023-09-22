@@ -9,7 +9,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
-import transformers import BertTokenizer  
+from transformers import BertTokenizer  
 #current_directory = Path(__file__).parent #Get current directory
 #file = open(os.path.join(current_directory, 'bestBERT.pkl'), 'rb')
 import requests
