@@ -14,7 +14,7 @@ import transformers
 #file = open(os.path.join(current_directory, 'bestBERT.pkl'), 'rb')
 import requests
 
-
+nltk.download('punkt')
 # Replace 'YOUR_DRIVE_LINK_HERE' with the actual link to your .pkl file
 drive_link = 'https://drive.google.com/drive/u/0/folders/1A3g5O4gDbYiwCbdxcQebqh0pT6ORo2KC'
 
