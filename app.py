@@ -10,6 +10,7 @@ from nltk.corpus import stopwords
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
 from transformers import BertTokenizer  
+import gdown
 #current_directory = Path(__file__).parent #Get current directory
 #file = open(os.path.join(current_directory, 'bestBERT.pkl'), 'rb')
 import requests
@@ -19,38 +20,21 @@ nltk.download('stopwords')
 # Replace 'YOUR_DRIVE_LINK_HERE' with the actual link to your .pkl file
 google_drive_link = 'https://drive.google.com/file/d/153DIFyVs6Zc8PakmrwnZRMuG-wekYT7M/view?usp=drive_link'
 
-# Define a function to download the .pkl file and load it as a model
-google_drive_link = 'YOUR_GOOGLE_DRIVE_LINK_HERE'
 
 # Define a function to download the .pkl file and load it as a model
 def load_model_from_drive(google_drive_link):
     try:
-        # Create a session to handle cookies
-        session = requests.Session()
+        # Define the URL for the Google Drive file
+        url = f'https://drive.google.com/uc?id={google_drive_link}'
         
-        # Generate the Google Drive file ID from the link
-        file_id = google_drive_link.split('/')[-2]
+        # Download the file using gdown
+        gdown.download(url, 'model.pkl', quiet=False)
         
-        # Construct the URL to fetch the file
-        url = f'https://drive.google.com/uc?id={file_id}'
+        # Load the model from the downloaded .pkl file
+        with open('model.pkl', 'rb') as file:
+            model = pickle.load(file)
         
-        # Send a GET request to download the file
-        response = session.get(url)
-        
-        # Check if the request was successful (status code 200)
-        if response.status_code == 200:
-            # Open a local file for writing and save the content of the response
-            with open('model.pkl', 'wb') as file:
-                file.write(response.content)
-            
-            # Load the model from the downloaded .pkl file
-            with open('model.pkl', 'rb') as file:
-                model = pickle.load(file)
-            
-            return model
-        else:
-            print("Failed to download the file. Status code:", response.status_code)
-            return None
+        return model
     except Exception as e:
         print("An error occurred:", str(e))
         return None
