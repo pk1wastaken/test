@@ -1,5 +1,6 @@
 streamlit
 numpy
 os
+xgboost
 transformers
 re
