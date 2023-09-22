@@ -1,1 +1,7 @@
-
+streamlit
+numpy
+string
+xgboost
+pickle
+os
+pathlib 
