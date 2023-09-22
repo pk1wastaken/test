@@ -102,7 +102,7 @@ def main():
     xx= convert_text(prompt)
     
     if st.button('Predict'):
-        y=model.predict(xx)
+        y=loaded_model.predict(xx)
         w=y[0][0] *100
         v=y[0][1] *100
         if y[0][0]> y[0][1] and y[0][0]>0.6 :
