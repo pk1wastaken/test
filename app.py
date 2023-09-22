@@ -17,13 +17,25 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
 nltk.download('all')
 nltk.download('stopwords')
 # Replace 'YOUR_DRIVE_LINK_HERE' with the actual link to your .pkl file
-drive_link = 'https://drive.google.com/file/d/153DIFyVs6Zc8PakmrwnZRMuG-wekYT7M/view?usp=drive_link'
+google_drive_link = 'https://drive.google.com/file/d/153DIFyVs6Zc8PakmrwnZRMuG-wekYT7M/view?usp=drive_link'
 
 # Define a function to download the .pkl file and load it as a model
-def load_model_from_drive(drive_link):
+google_drive_link = 'YOUR_GOOGLE_DRIVE_LINK_HERE'
+
+# Define a function to download the .pkl file and load it as a model
+def load_model_from_drive(google_drive_link):
     try:
+        # Create a session to handle cookies
+        session = requests.Session()
+        
+        # Generate the Google Drive file ID from the link
+        file_id = google_drive_link.split('/')[-2]
+        
+        # Construct the URL to fetch the file
+        url = f'https://drive.google.com/uc?id={file_id}'
+        
         # Send a GET request to download the file
-        response = requests.get(drive_link)
+        response = session.get(url)
         
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
@@ -43,8 +55,8 @@ def load_model_from_drive(drive_link):
         print("An error occurred:", str(e))
         return None
 
-# Call the function to load the model from the drive link
-loaded_model = load_model_from_drive(drive_link)
+# Call the function to load the model from the Google Drive link
+loaded_model = load_model_from_drive(google_drive_link)
 
 # Check if the model was successfully loaded
 if loaded_model is not None:
@@ -52,7 +64,6 @@ if loaded_model is not None:
     # You can now use the 'loaded_model' in your application.
 else:
     print("Failed to load the model.")
-
 # Load the trained model from the .pkl file
 #with open('bestBERT.pkl', 'rb') as file:
  #   model = pickle.load(file)
