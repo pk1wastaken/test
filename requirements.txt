@@ -4,3 +4,4 @@ numpy
 xgboost
 transformers
 nltk
+TensorFlow
