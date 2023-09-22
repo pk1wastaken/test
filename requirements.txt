@@ -1,7 +1,5 @@
 streamlit
 numpy
-xgboost
-pickle
 os
 transformers
 re
