@@ -2,3 +2,4 @@ streamlit
 numpy
 xgboost
 transformers
+nltk
