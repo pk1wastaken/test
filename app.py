@@ -12,11 +12,49 @@ from nltk.tree import Tree
 import transformers
 #current_directory = Path(__file__).parent #Get current directory
 #file = open(os.path.join(current_directory, 'bestBERT.pkl'), 'rb')
+import requests
 
+
+# Replace 'YOUR_DRIVE_LINK_HERE' with the actual link to your .pkl file
+drive_link = 'https://drive.google.com/drive/u/0/folders/1A3g5O4gDbYiwCbdxcQebqh0pT6ORo2KC'
+
+# Define a function to download the .pkl file and load it as a model
+def load_model_from_drive(drive_link):
+    try:
+        # Send a GET request to download the file
+        response = requests.get(drive_link)
+        
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Open a local file for writing and save the content of the response
+            with open('model.pkl', 'wb') as file:
+                file.write(response.content)
+            
+            # Load the model from the downloaded .pkl file
+            with open('model.pkl', 'rb') as file:
+                model = pickle.load(file)
+            
+            return model
+        else:
+            print("Failed to download the file. Status code:", response.status_code)
+            return None
+    except Exception as e:
+        print("An error occurred:", str(e))
+        return None
+
+# Call the function to load the model from the drive link
+loaded_model = load_model_from_drive(drive_link)
+
+# Check if the model was successfully loaded
+if loaded_model is not None:
+    print("Model loaded successfully.")
+    # You can now use the 'loaded_model' in your application.
+else:
+    print("Failed to load the model.")
 
 # Load the trained model from the .pkl file
-with open('bestBERT.pkl', 'rb') as file:
-    model = pickle.load(file)
+#with open('bestBERT.pkl', 'rb') as file:
+ #   model = pickle.load(file)
 def anonymisation (text , first_party , second_party):
     
     first_words = first_party.split()
