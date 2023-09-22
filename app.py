@@ -27,10 +27,10 @@ def load_model_from_drive(google_drive_link):
         url = f'https://drive.google.com/uc?id={google_drive_link}'
         
         # Download the file using gdown
-        gdown.download(url, 'model.pkl', quiet=False)
+        gdown.download(url, 'bestBERT.pkl', quiet=False)
         
         # Load the model from the downloaded .pkl file
-        with open('model.pkl', 'rb') as file:
+        with open('bestBERT.pkl', 'rb') as file:
             model = pickle.load(file)
         
         return model
